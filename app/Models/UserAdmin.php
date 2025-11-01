@@ -12,6 +12,8 @@ class UserAdmin extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -21,9 +23,12 @@ class UserAdmin extends Authenticatable implements FilamentUser
 
     protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Tentukan user bisa mengakses panel tertentu
-     */
+    // 🔹 Helper role
+    public function isAdministrator(): bool
+    {
+        return $this->role === 'administrator';
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return match ($this->role) {

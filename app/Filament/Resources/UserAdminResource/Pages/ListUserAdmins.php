@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\UserAdmins\Pages;
+namespace App\Filament\Resources\UserAdminResource\Pages;
 
-use App\Filament\Resources\UserAdmins\UserAdminResource;
-use Filament\Actions\CreateAction;
+use App\Filament\Resources\UserAdminResource;
+use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListUserAdmins extends ListRecords
@@ -13,7 +13,7 @@ class ListUserAdmins extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }
