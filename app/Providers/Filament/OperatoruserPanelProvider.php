@@ -19,26 +19,20 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class OperatoruserPanelProvider extends PanelProvider
+class OperatorUserPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->id('operatoruser')
             ->path('operatoruser')
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+            ->login()
+            ->colors(['primary' => Color::Amber])
             ->discoverResources(in: app_path('Filament/Operatoruser/Resources'), for: 'App\Filament\Operatoruser\Resources')
             ->discoverPages(in: app_path('Filament/Operatoruser/Pages'), for: 'App\Filament\Operatoruser\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
+            ->pages([Dashboard::class])
             ->discoverWidgets(in: app_path('Filament/Operatoruser/Widgets'), for: 'App\Filament\Operatoruser\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
+            ->widgets([AccountWidget::class, FilamentInfoWidget::class])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -50,8 +44,6 @@ class OperatoruserPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
+            ->authMiddleware([Authenticate::class]);
     }
 }

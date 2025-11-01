@@ -26,19 +26,13 @@ class PengaduanPanelProvider extends PanelProvider
         return $panel
             ->id('pengaduan')
             ->path('pengaduan')
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+            ->login()
+            ->colors(['primary' => Color::Amber])
             ->discoverResources(in: app_path('Filament/Pengaduan/Resources'), for: 'App\Filament\Pengaduan\Resources')
             ->discoverPages(in: app_path('Filament/Pengaduan/Pages'), for: 'App\Filament\Pengaduan\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
+            ->pages([Dashboard::class])
             ->discoverWidgets(in: app_path('Filament/Pengaduan/Widgets'), for: 'App\Filament\Pengaduan\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
+            ->widgets([AccountWidget::class, FilamentInfoWidget::class])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -50,8 +44,6 @@ class PengaduanPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
+            ->authMiddleware([Authenticate::class]);
     }
 }

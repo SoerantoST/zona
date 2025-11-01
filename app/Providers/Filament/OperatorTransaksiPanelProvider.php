@@ -24,21 +24,15 @@ class OperatorTransaksiPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('operatorTransaksi')
-            ->path('operatorTransaksi')
-            ->colors([
-                'primary' => Color::Amber,
-            ])
-            ->discoverResources(in: app_path('Filament/OperatorTransaksi/Resources'), for: 'App\Filament\OperatorTransaksi\Resources')
-            ->discoverPages(in: app_path('Filament/OperatorTransaksi/Pages'), for: 'App\Filament\OperatorTransaksi\Pages')
-            ->pages([
-                Dashboard::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/OperatorTransaksi/Widgets'), for: 'App\Filament\OperatorTransaksi\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
+            ->id('operatortransaksi')
+            ->path('operatortransaksi')
+            ->login()
+            ->colors(['primary' => Color::Amber])
+            ->discoverResources(in: app_path('Filament/Operatortransaksi/Resources'), for: 'App\Filament\Operatortransaksi\Resources')
+            ->discoverPages(in: app_path('Filament/Operatortransaksi/Pages'), for: 'App\Filament\Operatortransaksi\Pages')
+            ->pages([Dashboard::class])
+            ->discoverWidgets(in: app_path('Filament/Operatortransaksi/Widgets'), for: 'App\Filament\Operatortransaksi\Widgets')
+            ->widgets([AccountWidget::class, FilamentInfoWidget::class])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -50,8 +44,6 @@ class OperatorTransaksiPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
+            ->authMiddleware([Authenticate::class]);
     }
 }
