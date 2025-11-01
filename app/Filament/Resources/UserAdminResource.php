@@ -9,14 +9,13 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
-use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class UserAdminResource extends Resource
 {
     protected static ?string $model = UserAdmin::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Manajemen User';
 
@@ -64,7 +63,6 @@ class UserAdminResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
 
-                // Ganti BadgeColumn (deprecated) dengan TextColumn + badge()
                 Tables\Columns\TextColumn::make('role')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
@@ -109,16 +107,10 @@ class UserAdminResource extends Resource
         ];
     }
 
-    /**
-     * Helper untuk menyederhanakan pengecekan apakah user saat ini administrator.
-     * Menggunakan instanceof agar Intelephense tahu tipe objek dan tidak menandai
-     * method isAdministrator() sebagai undefined.
-     */
     protected static function currentUserIsAdmin(): bool
     {
         $user = Auth::user();
 
-        // Pastikan user adalah instance dari model UserAdmin sebelum panggil isAdministrator()
         if ($user instanceof UserAdmin) {
             return $user->isAdministrator();
         }
@@ -126,7 +118,6 @@ class UserAdminResource extends Resource
         return false;
     }
 
-    // Role-based authorization untuk semua aksi CRUD
     public static function canCreate(): bool
     {
         return self::currentUserIsAdmin();
@@ -144,6 +135,6 @@ class UserAdminResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return true; // Semua role bisa melihat daftar user
+        return true;
     }
 }
