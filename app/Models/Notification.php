@@ -13,5 +13,5 @@ class Notification extends Model
         'user_id','title','message','type','read_status'
     ];
 
-    public function user() { return $this->belongsTo(User::class); }
+    public function user() { return $this->belongsTo(ZonaUser::class); }
 }

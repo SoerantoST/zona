@@ -11,6 +11,6 @@ class EWallet extends Model
 
     protected $fillable = ['user_id','balance'];
 
-    public function user() { return $this->belongsTo(User::class); }
+    public function user() { return $this->belongsTo(ZonaUser::class); }
     public function transactions() { return $this->hasMany(EWalletTransaction::class, 'wallet_id'); }
 }

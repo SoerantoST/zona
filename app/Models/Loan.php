@@ -11,7 +11,7 @@ class Loan extends Model
 
     protected $fillable = ['user_id','amount','status','approved_by'];
 
-    public function user() { return $this->belongsTo(User::class, 'user_id'); }
-    public function approver() { return $this->belongsTo(User::class, 'approved_by'); }
+    public function user() { return $this->belongsTo(ZonaUser::class, 'user_id'); }
+    public function approver() { return $this->belongsTo(ZonaUser::class, 'approved_by'); }
     public function histories() { return $this->hasMany(LoanHistory::class); }
 }
