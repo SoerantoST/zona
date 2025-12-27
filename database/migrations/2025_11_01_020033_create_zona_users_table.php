@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('zona_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(); // Ubah ke nullable sementara proses pendaftaran
             $table->string('email')->unique();
-            $table->string('password');
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
-            $table->foreignId('ewallet_id')->nullable()->constrained('e_wallets')->onDelete('set null');
+            $table->string('phone')->unique()->nullable(); // Tambahkan untuk registrasi HP
+            $table->string('password')->nullable(); // Nullable karena user Google tidak pakai password manual
+            $table->string('google_id')->nullable(); 
+            $table->foreignId('role_id')->default(1)->constrained('roles');
             $table->decimal('total_transaksi', 15, 2)->default(0);
             $table->timestamps();
         });
+
     }
 
     /**

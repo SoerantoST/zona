@@ -12,6 +12,10 @@ class Notification extends Model
     protected $fillable = [
         'user_id','title','message','type','read_status'
     ];
+    protected $casts = [
+    'read_status' => 'boolean',
+    'created_at' => 'datetime:Y-m-d H:i:s',
+];
 
     public function user() { return $this->belongsTo(ZonaUser::class); }
 }
